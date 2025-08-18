@@ -30,7 +30,10 @@ This system allows **Admin** to manage employees and tasks, while **Employees** 
 ---
 
 ## 📸 Screenshots
-(Add screenshots of your dashboard and pages here)
+<img width="1813" height="949" alt="Screenshot from 2025-08-18 18-29-27" src="https://github.com/user-attachments/assets/4fb7f625-f774-4b9e-8feb-cf3413e90f0e" />
+<img width="1813" height="949" alt="Screenshot from 2025-08-18 18-29-52" src="https://github.com/user-attachments/assets/5a8599bf-d814-47be-ab83-6390c5f8698c" />
+<img width="1813" height="949" alt="Screenshot from 2025-08-18 18-30-04" src="https://github.com/user-attachments/assets/3d5f0263-7aec-4610-a0e3-634ec59fcb3a" />
+
 
 ---
 
