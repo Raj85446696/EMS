@@ -1,6 +1,8 @@
 import React from "react";
-
+import {useNavigate} from 'react-router-dom';
 const Navbar = () => {
+  
+  
   return (
     <div className="flex items-center justify-between bg-gradient-to-r from-blue-500 to-indigo-600 text-white p-4 shadow-lg p-5">
       <h1 className="text-xl font-semibold flex items-center gap-2">

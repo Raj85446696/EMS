@@ -1,13 +1,15 @@
 import React, { useState } from "react";
 
-export default function Login() {
+export default function Login({handleLogin}) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
     // For now just log credentials (replace with API call)
-    console.log("Email:", email, "Password:", password);
+    handleLogin(email,password)
+    setEmail('');
+    setPassword('');
   };
 
   return (

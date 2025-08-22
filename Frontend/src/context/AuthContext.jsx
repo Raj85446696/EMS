@@ -1,9 +1,19 @@
-import React from 'react'
+import React, { createContext, useEffect, useContext } from "react";
+import { getLocalStorage, setLocalStorage } from "../utils/localStorage";
 
-const AuthContext = ({children}) => {
+export const AuthContexts = createContext();
+
+const AuthProvider = ({ children }) => {
+  useEffect(() => {
+    setLocalStorage();
+    getLocalStorage();
+  }, []);
+
   return (
-    <>{children}</>
-  )
-}
+    <AuthContexts.Provider value={"sarthak"}>
+      {children}
+    </AuthContexts.Provider>
+  );
+};
 
-export default AuthContext
+export default AuthProvider;
