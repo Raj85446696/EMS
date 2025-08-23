@@ -1,72 +1,36 @@
 import React, { useState } from "react";
+import { useAuth } from "../../context/AuthProvider";
 
 const TaskList = () => {
   const [swipedIndex, setSwipedIndex] = useState(null);
-
-  const tasks = [
-    {
-      id: 1,
-      priority: "🔥 High",
-      date: "18 Aug",
-      title: "Ek Aur Task",
-      desc: "Task to karna parega mere bhai 😅",
-      color: "bg-red-100 text-red-600",
-    },
-    {
-      id: 2,
-      priority: "⚡ Medium",
-      date: "19 Aug",
-      title: "React Project",
-      desc: "Complete the frontend design",
-      color: "bg-yellow-100 text-yellow-600",
-    },
-    {
-      id: 3,
-      priority: "✅ Low",
-      date: "20 Aug",
-      title: "Grocery Shopping",
-      desc: "Buy fruits and vegetables",
-      color: "bg-green-100 text-green-600",
-    },
-    {
-      id: 4,
-      priority: "✅ Low",
-      date: "20 Aug",
-      title: "Grocery Shopping",
-      desc: "Buy fruits and vegetables",
-      color: "bg-green-100 text-green-600",
-    },
-    {
-      id: 5,
-      priority: "✅ Low",
-      date: "20 Aug",
-      title: "Grocery Shopping",
-      desc: "Buy fruits and vegetables",
-      color: "bg-green-100 text-green-600",
-    },
-    {
-      id: 6,
-      priority: "✅ Low",
-      date: "20 Aug",
-      title: "Grocery Shopping",
-      desc: "Buy fruits and vegetables",
-      color: "bg-green-100 text-green-600",
-    },
-  ];
-
+  const { loggedInUser } = useAuth();
   const handleSwipe = (index) => {
     setSwipedIndex(swipedIndex === index ? null : index);
   };
 
+  // Utility to display status
+  const renderStatus = (status) => {
+    if (status.completed) {
+      return <span className="px-3 py-1 bg-green-100 text-green-600 rounded-full text-xs">✅ Completed</span>;
+    }
+    if (status.failed) {
+      return <span className="px-3 py-1 bg-red-100 text-red-600 rounded-full text-xs">❌ Failed</span>;
+    }
+    if (status.active) {
+      return <span className="px-3 py-1 bg-blue-100 text-blue-600 rounded-full text-xs">🔄 Active</span>;
+    }
+    if (status.newTask) {
+      return <span className="px-3 py-1 bg-yellow-100 text-yellow-600 rounded-full text-xs">🆕 New Task</span>;
+    }
+    return null;
+  };
+
   return (
-    <div
-      className="w-full max-w-[95rem] mx-auto mt-6 overflow-x-auto"
-      id="task"
-    >
+    <div className="w-full max-w-[95rem] mx-auto mt-6 overflow-x-auto" id="task">
       <div className="flex gap-10 min-w-max px-6 pb-6">
-        {tasks.map((task, index) => (
+        {loggedInUser.tasks.map((task, index) => (
           <div
-            key={task.id}
+            key={index}
             className="relative overflow-hidden rounded-3xl min-w-[420px] max-w-md"
           >
             {/* Background Action (Delete) */}
@@ -81,25 +45,24 @@ const TaskList = () => {
               }`}
               onClick={() => handleSwipe(index)}
             >
-              {/* Priority + Date */}
+              {/* Category + Date */}
               <div className="flex justify-between items-center">
-                <span
-                  className={`text-sm font-semibold px-4 py-1 rounded-full ${task.color}`}
-                >
-                  {task.priority}
+                <span className="text-sm font-semibold px-4 py-1 rounded-full bg-indigo-100 text-indigo-600">
+                  {task.category}
                 </span>
                 <span className="text-sm text-gray-500">{task.date}</span>
               </div>
 
               {/* Title + Description */}
               <div>
-                <h1 className="text-2xl font-bold text-gray-800">
-                  {task.title}
-                </h1>
+                <h1 className="text-2xl font-bold text-gray-800">{task.title}</h1>
                 <p className="text-gray-600 mt-3 text-base leading-relaxed">
-                  {task.desc}
+                  {task.description}
                 </p>
               </div>
+
+              {/* Status */}
+              <div className="mt-3">{renderStatus(task.status)}</div>
             </div>
           </div>
         ))}

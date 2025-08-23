@@ -1,31 +1,29 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import Login from "./components/Auth/Login";
 import EmployeeDashboard from "./components/Dashboard/EmployeeDashboard";
 import AdminDashboard from "./components/Dashboard/AdminDashboard";
-import AuthContexts from './context/AuthContext';
+import { AuthContext } from "./context/AuthProvider";
 
 const App = () => {
+  const { loggedInUser, login, logout } = useContext(AuthContext);
   const [user, setUser] = useState(null);
 
-  const handleLogin = (email, password) => {
-    if (email === "admin@gmail.com" && password === "123") {
-      setUser("admin");
-    } else if (email === "employee@gmail.com" && password === "123") {
-      setUser("employee");
-    } else {
-      alert("Invalid credentials");
+  useEffect(() => {
+    if (loggedInUser) {
+      setUser(loggedInUser.role);
     }
-  };
+  }, [loggedInUser]);
 
-  const data = useContext(AuthContexts);
-  console.log(data);
-  
+  const handleLogin = (email, password) => {
+    const role = login(email, password);
+    if (role) setUser(role);
+  };
 
   return (
     <>
       {!user && <Login handleLogin={handleLogin} />}
-      {user === "admin" && <AdminDashboard />}
-      {user === "employee" && <EmployeeDashboard />}
+      {user === "admin" && <AdminDashboard logout={logout} />}
+      {user === "employee" && <EmployeeDashboard logout={logout} />}
     </>
   );
 };
