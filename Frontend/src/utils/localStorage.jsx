@@ -88,6 +88,51 @@ const employees = [
       },
     ],
   },
+
+  {
+    id: 3,
+    name: "Prashant Kumar",
+    email: "prashant@example.com",
+    password: "123",
+    tasks: [
+      {
+        title: "Prepare Sales Report",
+        description: "Compile Q1 sales data into an Excel sheet.",
+        date: "2025-08-25",
+        category: "Reporting",
+        status: {
+          active: true,
+          newTask: true,
+          completed: true,
+          failed: false,
+        },
+      },
+      {
+        title: "Client Follow-up",
+        description: "Call pending clients for feedback.",
+        date: "2025-08-28",
+        category: "Communication",
+        status: {
+          active: true,
+          newTask: false,
+          completed: true,
+          failed: true,
+        },
+      },
+      {
+        title: "Inventory Check",
+        description: "Cross-check warehouse stock levels.",
+        date: "2025-09-01",
+        category: "Operations",
+        status: {
+          active: true,
+          newTask: false,
+          completed: false,
+          failed: true,
+        },
+      },
+    ],
+  },
 ];
 
 const admin = [

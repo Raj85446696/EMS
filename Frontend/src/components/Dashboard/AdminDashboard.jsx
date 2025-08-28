@@ -1,6 +1,9 @@
 import React from "react";
 import Navbar from "./Navbar";
+import { useAuth } from "../../context/AuthProvider";
 const AdminDashboard = () => {
+  const { userData } = useAuth();
+  console.log(userData.employees);
   return (
     <>
       <Navbar />
@@ -82,6 +85,31 @@ const AdminDashboard = () => {
             🚀 Create Task
           </button>
         </form>
+      </div>
+
+      {/* Employees List */}
+      <div className="max-w-3xl mx-auto mt-12">
+        <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">
+          👥 Employee Directory
+        </h2>
+        <div className="bg-white/80 backdrop-blur-md shadow-xl rounded-2xl p-6 border border-gray-200">
+          <ul className="divide-y divide-gray-200">
+            {userData?.employees?.map((emp, index) => (
+              <li
+                key={index}
+                className="flex justify-between items-center py-4 px-2 hover:bg-gray-50 rounded-lg transition"
+              >
+                <div>
+                  <p className="font-semibold text-gray-900">{emp.name}</p>
+                  <p className="text-sm text-gray-600">{emp.email}</p>
+                </div>
+                <span className="px-3 py-1 text-xs font-medium bg-indigo-100 text-indigo-700 rounded-full">
+                  Employee
+                </span>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </>
   );
